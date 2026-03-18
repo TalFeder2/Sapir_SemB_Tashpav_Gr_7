@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>מערכת שעות | סמסטר ב' תשפ"ו | מחזור 7</title>
-  <meta name="description" content="מערכת שעות לשיעורים פיזיים או מקוונים." />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     body{margin:0;font-family:'Heebo',sans-serif;background:#2b3a59;color:#f1f5f9;text-align:center;direction:rtl}
@@ -12,6 +11,7 @@
     .logo{max-width:200px;margin:20px auto 10px;display:block}
     .subheader{font-size:16px;color:#94a3b8;margin-bottom:20px;font-weight:500}
     h1{margin:10px 0;font-size:26px;font-weight:800}
+    
     .next{max-width:860px;margin:0 auto 8px; padding:14px 18px; border-radius:14px; 
       background:#3a4a6a; box-shadow:0 8px 18px rgba(0,0,0,.18); text-align:center}
     .next-title{font-size:20px; font-weight:800; margin:0 0 6px}
@@ -21,45 +21,45 @@
     .controls { display: flex; justify-content: center; gap: 12px; margin: 15px auto 25px; flex-wrap: wrap; }
     .control-btn { background: #1e293b; color: #f8fafc; border: 2px solid #38bdf8; padding: 10px 20px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s ease; font-family: 'Heebo', sans-serif; }
     .control-btn:hover { background: #38bdf8; color: #0f172a; transform: translateY(-2px); }
-    .control-btn:active { transform: translateY(0); }
     .control-btn.current { background: #38bdf8; color: #0f172a; font-weight: 800; }
 
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:800px;margin:0 auto;padding:0 20px 20px}
     @media(max-width:700px){.grid{grid-template-columns:1fr}}
-    .card{background:#3a4a6a;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+    
+    /* Centering the card content */
+    .card{background:#3a4a6a;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(0,0,0,.25); text-align: center;}
     .lecturer{font-weight:700;font-size:18px;margin-bottom:4px}
     .course{color:#dbeafe;font-weight:600;margin:0 0 8px}
-    .time{font-weight:600;color:#38bdf8;margin-bottom:6px}
-    .break{color:#cbd5e1;font-size:14px;margin:2px 0}
+    
+    /* Time formatting: Forces Start on Right, End on Left */
+    .time, .break, .hashlama-list li strong {
+      font-weight:600;
+      color:#38bdf8;
+      margin-bottom:6px; 
+      display: inline-block;
+      direction: ltr; 
+      unicode-bidi: isolate;
+    }
+    .break { color:#cbd5e1; font-size:14px; margin:2px 0; }
+    
     .room-info{color:#fde68a;font-weight:600;font-size:15px;margin:4px 0}
-    
-    .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px}
+    .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px; text-align: center;}
     .btn:hover{transform:translateY(-2px)}
-    .btn-disabled { background: #94a3b8; color: #1e293b; cursor: not-allowed; }
-    .btn-disabled:hover { transform: none; }
     
-    /* עיצוב ייעודי לקורס ההשלמה */
-    .hashlama-layout { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; text-align: right; }
+    .hashlama-layout { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; text-align: center; }
     .hashlama-col { flex: 1; min-width: 250px; background: #2b3a59; padding: 15px 20px; border-radius: 12px; }
     .hashlama-col h3 { color: #38bdf8; margin-top: 0; border-bottom: 1px solid #3a4a6a; padding-bottom: 10px; margin-bottom: 12px; }
     .hashlama-list { list-style: none; padding: 0; margin: 0; line-height: 1.8; font-size: 15px; }
-    .hashlama-btn-group { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin: 15px 0 25px; }
-    .hashlama-btn-group .btn { width: auto; margin-top: 0; }
-
-    .day-note { grid-column: 1 / -1; background: #facc15; color: #1e293b; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 16px; margin-bottom: 5px; box-shadow: 0 4px 10px rgba(0,0,0,.2); }
-    .online-guidelines { grid-column: 1 / -1; background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; padding: 15px 20px; border-radius: 14px; text-align: right; margin-top: 10px; font-size: 14px; color: #e2e8f0; line-height: 1.6; }
-    .online-guidelines strong { color: #38bdf8; display: block; margin-bottom: 5px; font-size: 16px; }
 
     footer{color:#94a3b8;font-size:13px;margin:30px 0 80px}
-    .floating-btn{position:fixed;left:20px;bottom:20px;background:linear-gradient(180deg,#facc15,#f59e0b);color:#1e293b;font-weight:800;border:none;border-radius:12px;padding:14px 18px;width:160px;cursor:pointer;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,.35);transition:transform .2s ease,filter .2s ease;display:flex;align-items:center;justify-content:center;text-align:center;}
-    .floating-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+    .floating-btn{position:fixed;left:20px;bottom:20px;background:linear-gradient(180deg,#facc15,#f59e0b);color:#1e293b;font-weight:800;border:none;border-radius:12px;padding:14px 18px;width:160px;cursor:pointer;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;}
   </style>
 </head>
 <body>
   <header>
     <img src="Sapir_new_logo.svg.png" alt="לוגו ספיר" class="logo" />
     <div class="subheader">תואר שני בלימודי תרבות - מנהיגות ויזמות בתרבות</div>
-    <h1>מערכת שעות – יום רביעי | סמסטר ב' תשפ"ו | מחזור 7</h1>
+    <h1>מערכת שעות | מחזור 7</h1>
   </header>
 
   <section class="next">
@@ -75,9 +75,9 @@
 
   <section id="schedule" class="grid"></section>
 
-  <a class="floating-btn" href="https://docs.google.com/document/d/1PwxQVnFRJCV9Cz4eaOhc5msm1k4ZZos6/edit?usp=sharing&ouid=109655004313851384278&rtpof=true&sd=true" target="_blank">📄 קישור לקובץ לוח זמנים מלא</a>
+  <a class="floating-btn" href="https://docs.google.com/document/d/1PwxQVnFRJCV9Cz4eaOhc5msm1k4ZZos6/edit?usp=sharing" target="_blank">📄 לוח זמנים מלא</a>
 
-  <footer>© 2026 מערכת שעות | תאריך עדכון: 15/3/26</footer>
+  <footer>© 2026 מערכת שעות | עדכון אחרון: 15/3/26</footer>
 
   <script>
     const heMonths = ["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
@@ -85,7 +85,7 @@
     const schedule = [
       { day: 4,  month: "מרץ", type: "שבוע מקדים", special: "שבוע מקדים" },
       { day: 11, month: "מרץ", type: "קורס השלמה מקוון", isHashlama: true },
-      { day: 18, month: "מרץ", type: "לימודים מקוונים" }, // עודכן מפיזי למקוון
+      { day: 18, month: "מרץ", type: "לימודים מקוונים" },
       { day: 25, month: "מרץ", type: "לימודים מקוונים" },
       { day: 1,  month: "אפריל", type: "חופשה", special: "חופשת פסח - אין לימודים" },
       { day: 8,  month: "אפריל", type: "חופשה", special: "חופשת פסח - אין לימודים" },
@@ -97,37 +97,37 @@
       { day: 20, month: "מאי", type: "לימודים מקוונים" },
       { day: 27, month: "מאי", type: "יום לימודים פיזי" },
       { day: 3,  month: "יוני", type: "לימודים מקוונים" },
-      { day: 10, month: "יוני", type: "סיור", special: "סיור? יקבע בקרוב (פיזי או מקוון)" },
-      { day: 17, month: "יוני", type: "סיור", special: "סיור? יקבע בקרוב (פיזי או מקוון)" },
-      { day: 24, month: "יוני", type: "יום שמור", special: "יום שמור לשיעורי השלמה (לימודים מקוונים)" },
+      { day: 10, month: "יוני", type: "סיור", special: "סיור? יקבע בקרוב" },
+      { day: 17, month: "יוני", type: "סיור", special: "סיור? יקבע בקרוב" },
+      { day: 24, month: "יוני", type: "יום שמור", special: "יום שמור לשיעורי השלמה" },
     ];
 
     const courses = [
       { 
         id: "mipuy", lecturer: "גב' שירה לפידות וגב' מיכל דיין", 
         course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", 
-        time: "9:00–10:30", physicalTime: "10:30–11:15", 
-        break: "10:30–11:00", physicalBreak: "11:15–11:30", 
+        time: "10:30–9:00", physicalTime: "11:15–10:30", 
+        break: "11:00–10:30", physicalBreak: "11:30–11:15", 
         zoom: "https://sapir.zoom.us/my/shirasapir", room: "בניין 14, חדר 14102" 
       },
       { 
         id: "hashpaot", lecturer: "גב' ראומה מנצור", 
         course: "תיאוריה ופרקטיקה של השפעות תרבותיות בישראל", 
-        time: "11:00–12:30", physicalTime: "11:30–12:45", 
-        break: "12:30–13:15", physicalBreak: "12:45–13:15", 
+        time: "12:30–11:00", physicalTime: "12:45–11:30", 
+        break: "13:15–12:30", physicalBreak: "13:15–12:45", 
         zoom: "https://sapir.zoom.us/j/87055276066", room: "בניין 14, חדר 14102" 
       },
       { 
         id: "appel", lecturer: "ד\"ר נדב אפל", 
         course: "מבטי עומק בתיאוריות של תרבות", 
-        time: "13:15–14:45", physicalTime: "13:15–14:30", 
-        break: "14:45–15:15", physicalBreak: "14:30–15:00 (משותף עם מחזור 6)", 
+        time: "14:45–13:15", physicalTime: "14:30–13:15", 
+        break: "15:15–14:45", physicalBreak: "15:00–14:30 (משותף עם מחזור 6)", 
         zoom: "https://sapir.zoom.us/my/nadavappel", room: "בניין 14, חדר 14102" 
       },
       { 
         id: "shenkar", lecturer: "ד\"ר יעל שנקר", 
         course: "מתודולוגיות בחקר תרבות", 
-        time: "15:15–16:45", physicalTime: "15:00–16:30", 
+        time: "16:45–15:15", physicalTime: "16:30–15:00", 
         break: "", physicalBreak: "", 
         zoom: "https://sapir.zoom.us/j/5569375877", room: "בניין 14, חדר 14102" 
       }
@@ -135,9 +135,8 @@
 
     function getNextWednesday(fromDate){
       const d = new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
-      const WED = 3;
-      let diff = (WED - d.getDay() + 7) % 7;
-      d.setDate(d.getDate() + diff);
+      const diff = (3 - d.getDay() + 7) % 7;
+      d.setDate(d.getDate() + (diff === 0 && fromDate.getDay() === 3 ? 0 : diff));
       return d;
     }
 
@@ -147,149 +146,75 @@
       const nextWed = getNextWednesday(dateToView);
       const day = nextWed.getDate();
       const monthName = heMonths[nextWed.getMonth()];
-
       document.getElementById('next-date').textContent = `${day} ב${monthName}`;
 
       const match = schedule.find(e => e.day === day && e.month === monthName);
-      
-      const typeDisplay = match ? match.type : "אין מידע זמין בלוח הזמנים";
-      document.getElementById('meeting-type').textContent = typeDisplay;
+      document.getElementById('meeting-type').textContent = match ? match.type : "אין מידע זמין";
 
       const container = document.getElementById("schedule");
       container.innerHTML = ""; 
 
       if (match) {
         if (match.isHashlama) {
-          const card = document.createElement("article");
-          card.className = "card";
-          card.style.gridColumn = "1 / -1"; 
-          card.style.textAlign = "right";
-          card.innerHTML = `
-            <h2 style="color: #fde68a; margin-top: 0;">קורס השלמה – שלישי-רביעי (10-11 למרץ)</h2>
-            <p style="font-size: 16px; margin-bottom: 5px; line-height: 1.5;">
-              קורס ההשלמה יתקיים במשך יומיים מלאים בימים שלישי-רביעי במתכונת מקוונת.<br>
-              <span class="break">ניתן להשלים את הקורס מההקלטה.</span>
-            </p>
-            
-            <div class="hashlama-btn-group">
-              <a class="btn" href="https://sapir.zoom.us/my/michaldayan" target="_blank">⤴︎ כניסה לזום הכללי של הקורס</a>
-              <a class="btn" href="https://sapir.zoom.us/my/nadavappel" target="_blank" style="background: linear-gradient(90deg, #f472b6, #db2777);">⤴︎ כניסה לזום של "לימודי תרבות" בלבד</a>
-            </div>
-
-            <div class="hashlama-layout">
-              <div class="hashlama-col">
-                <h3>יום שלישי 10.3</h3>
-                <ul class="hashlama-list">
-                  <li><strong>9:00–10:00:</strong> אוריינטציה ללימודים אקדמיים בתכנית (מפגש היכרות ותיאום ציפיות)</li>
-                  <li class="break"><strong>10:00–10:15:</strong> הפסקה</li>
-                  <li><strong>10:15–11:45:</strong> ניהול תרבות – אתגרי יסוד</li>
-                  <li class="break"><strong>11:45–12:30:</strong> הפסקה</li>
-                  <li><strong>12:30–14:00:</strong> ניהול תרבות – שפה מקצועית חלק א'</li>
-                  <li class="break"><strong>14:00–14:30:</strong> הפסקה</li>
-                  <li><strong>14:30–16:00:</strong> לימודי תרבות – חלק א'</li>
-                  <li class="break"><strong>16:00–16:30:</strong> הפסקה</li>
-                  <li><strong>16:30–18:00:</strong> לימודי תרבות חלק ב'</li>
-                </ul>
+          container.innerHTML = `
+            <article class="card" style="grid-column: 1 / -1;">
+              <h2 style="color: #fde68a; margin-top: 0;">קורס השלמה – שלישי-רביעי (10-11 למרץ)</h2>
+              <div class="hashlama-layout">
+                <div class="hashlama-col">
+                  <h3>יום שלישי 10.3</h3>
+                  <ul class="hashlama-list">
+                    <li><strong>10:00–9:00:</strong> אוריינטציה</li>
+                    <li class="break"><strong>10:15–10:00:</strong> הפסקה</li>
+                    <li><strong>11:45–10:15:</strong> ניהול תרבות</li>
+                    <li class="break"><strong>12:30–11:45:</strong> הפסקה</li>
+                    <li><strong>14:00–12:30:</strong> ניהול תרבות א'</li>
+                    <li class="break"><strong>14:30–14:00:</strong> הפסקה</li>
+                    <li><strong>16:00–14:30:</strong> לימודי תרבות א'</li>
+                  </ul>
+                </div>
+                <div class="hashlama-col">
+                  <h3>יום רביעי 11.3</h3>
+                  <ul class="hashlama-list">
+                    <li><strong>11:30–9:00:</strong> ניהול תרבות ב'</li>
+                    <li class="break"><strong>12:30–11:30:</strong> הפסקה</li>
+                    <li><strong>14:00–12:30:</strong> לימודי תרבות ג'</li>
+                    <li class="break"><strong>14:30–14:00:</strong> הפסקה</li>
+                    <li><strong>16:00–14:30:</strong> לימודי תרבות ד'</li>
+                    <li class="break"><strong>16:30–16:00:</strong> הפסקה</li>
+                    <li><strong>17:30–16:30:</strong> סיכום ורפלקציה</li>
+                  </ul>
+                </div>
               </div>
-              
-              <div class="hashlama-col">
-                <h3>יום רביעי 11.3</h3>
-                <ul class="hashlama-list">
-                  <li><strong>9:00–11:30:</strong> ניהול תרבות – שפה מקצועית חלק ב'</li>
-                  <li class="break"><strong>11:30–12:30:</strong> הפסקה</li>
-                  <li><strong>12:30–14:00:</strong> לימודי תרבות חלק ג'</li>
-                  <li class="break"><strong>14:00–14:30:</strong> הפסקה</li>
-                  <li><strong>14:30–16:00:</strong> לימודי תרבות חלק ד'</li>
-                  <li class="break"><strong>16:00–16:30:</strong> הפסקה</li>
-                  <li><strong>16:30–17:30:</strong> סיכום ורפלקציה</li>
-                </ul>
-              </div>
-            </div>
-          `;
-          container.appendChild(card);
-
-          const notesDiv = document.createElement("div");
-          notesDiv.className = "online-guidelines";
-          notesDiv.innerHTML = `
-            <strong>📌 הנחיות ללמידה מקוונת:</strong>
-            אנא הקפידו להיכנס בזמן לשיעורים המקוונים.<br>
-            הכינו לעצמכם עמדת לימוד נעימה ושקטה ממנה תוכלו להקשיב ולהשתתף בשיעורים.<br>
-            אנא השאירו מצלמה פתוחה, ובבקשה לא לעסוק בפעולות אחרות במקביל להשתתפות בשיעור.
-          `;
-          container.appendChild(notesDiv);
-
-        } else if (match.type === "חופשה" || match.type === "יום שמור" || match.type === "סיור" || match.type === "שבוע מקדים") {
-          const card = document.createElement("article");
-          card.className = "card";
-          card.style.gridColumn = "1 / -1"; 
-          card.style.textAlign = "center";
-          card.innerHTML = `<h2 style="color: #fde68a; margin: 10px 0;">${match.special}</h2>`;
-          container.appendChild(card);
+            </article>`;
+        } else if (match.special) {
+          container.innerHTML = `<article class="card" style="grid-column: 1 / -1; text-align: center;"><h2 style="color: #fde68a;">${match.special}</h2></article>`;
         } else {
           const isPhysical = match.type.includes("פיזי");
-          const isOnline = match.type.includes("מקוונים");
-
           courses.forEach(cls => {
             const displayTime = (isPhysical && cls.physicalTime) ? cls.physicalTime : cls.time;
             const displayBreak = (isPhysical && cls.physicalBreak) ? cls.physicalBreak : cls.break;
-            const displayCourse = cls.course; 
-            
-            let zoomBtnHtml = "";
-            if (!isPhysical) {
-                if (cls.zoom === "LINK_HERE") {
-                    zoomBtnHtml = `<span class="btn btn-disabled">⤴︎ כניסה לזום (יעודכן בהמשך)</span>`;
-                } else if (cls.zoom) {
-                    zoomBtnHtml = `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>`;
-                }
-            }
-
             const card = document.createElement("article");
             card.className = "card";
             card.innerHTML = `
               <div class="lecturer">${cls.lecturer}</div>
-              <div class="course">${displayCourse}</div>
-              <div class="time">${displayTime}</div>
+              <div class="course">${cls.course}</div>
+              <div class="time">זמן שיעור: ${displayTime}</div>
               ${isPhysical && cls.room ? `<div class="room-info">מיקום: ${cls.room}</div>` : ""}
-              ${displayBreak ? `<div class="break">הפסקה: ${displayBreak}</div>` : ""}
-              ${zoomBtnHtml}
+              ${displayBreak ? `<div><span class="break">${displayBreak} :הפסקה</span></div>` : ""}
+              ${!isPhysical ? `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : ""}
             `;
             container.appendChild(card);
           });
-
-          if (isOnline) {
-            const notesDiv = document.createElement("div");
-            notesDiv.className = "online-guidelines";
-            notesDiv.innerHTML = `
-              <strong>📌 הנחיות ללמידה מקוונת:</strong>
-              אנא הקפידו להיכנס בזמן לשיעורים המקוונים.<br>
-              הכינו לעצמכם עמדת לימוד נעימה ושקטה ממנה תוכלו להקשיב ולהשתתף בשיעורים.<br>
-              אנא השאירו מצלמה פתוחה, ובבקשה לא לעסוק בפעולות אחרות במקביל להשתתפות בשיעור.
-            `;
-            container.appendChild(notesDiv);
-          }
         }
       } else {
-        container.innerHTML = `<p style="grid-column: 1 / -1; font-size: 18px; color: #cbd5e1; text-align: center;">אין שיעורים מתוכננים לשבוע זה.</p>`;
+        container.innerHTML = `<p style="grid-column: 1 / -1;">אין שיעורים מתוכננים.</p>`;
       }
     }
 
     renderSchedule(currentDateToView);
-
-    document.getElementById('btn-prev').addEventListener('click', () => {
-      currentDateToView.setDate(currentDateToView.getDate() - 7);
-      renderSchedule(currentDateToView);
-    });
-
-    document.getElementById('btn-next').addEventListener('click', () => {
-      currentDateToView.setDate(currentDateToView.getDate() + 7);
-      renderSchedule(currentDateToView);
-    });
-
-    document.getElementById('btn-current').addEventListener('click', () => {
-      currentDateToView = new Date();
-      renderSchedule(currentDateToView);
-    });
-
+    document.getElementById('btn-prev').addEventListener('click', () => { currentDateToView.setDate(currentDateToView.getDate() - 7); renderSchedule(currentDateToView); });
+    document.getElementById('btn-next').addEventListener('click', () => { currentDateToView.setDate(currentDateToView.getDate() + 7); renderSchedule(currentDateToView); });
+    document.getElementById('btn-current').addEventListener('click', () => { currentDateToView = new Date(); renderSchedule(currentDateToView); });
   </script>
 </body>
 </html>
