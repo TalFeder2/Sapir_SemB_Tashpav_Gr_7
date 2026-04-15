@@ -26,12 +26,10 @@
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:800px;margin:0 auto;padding:0 20px 20px}
     @media(max-width:700px){.grid{grid-template-columns:1fr}}
     
-    /* Centering the card content */
     .card{background:#3a4a6a;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(0,0,0,.25); text-align: center;}
     .lecturer{font-weight:700;font-size:18px;margin-bottom:4px}
     .course{color:#dbeafe;font-weight:600;margin:0 0 8px}
     
-    /* Time formatting: Forces Start on Right, End on Left */
     .time, .break, .hashlama-list li strong {
       font-weight:600;
       color:#38bdf8;
@@ -46,6 +44,16 @@
     .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px; text-align: center;}
     .btn:hover{transform:translateY(-2px)}
     
+    .party-card {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%), 
+                  linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%) !important;
+      background-blend-mode: screen;
+      color: #1e293b !important;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4) !important;
+    }
+    .party-card .course { color: #0f172a !important; font-weight: 800 !important; }
+    .party-card .time { color: #6d28d9 !important; font-weight: 800 !important; }
+
     .hashlama-layout { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; text-align: center; }
     .hashlama-col { flex: 1; min-width: 250px; background: #2b3a59; padding: 15px 20px; border-radius: 12px; }
     .hashlama-col h3 { color: #38bdf8; margin-top: 0; border-bottom: 1px solid #3a4a6a; padding-bottom: 10px; margin-bottom: 12px; }
@@ -91,7 +99,7 @@
       { day: 8,  month: "אפריל", type: "חופשה", special: "חופשת פסח - אין לימודים" },
       { day: 15, month: "אפריל", type: "יום לימודים פיזי" },
       { day: 22, month: "אפריל", type: "חופשה", special: "יום העצמאות - אין לימודים" },
-      { day: 29, month: "אפריל", type: "יום לימודים פיזי" },
+      { day: 29, month: "אפריל", type: "יום לימודים פיזי מיוחד", special: "custom29" },
       { day: 6,  month: "מאי", type: "לימודים מקוונים" },
       { day: 13, month: "מאי", type: "לימודים מקוונים" },
       { day: 20, month: "מאי", type: "לימודים מקוונים" },
@@ -103,34 +111,10 @@
     ];
 
     const courses = [
-      { 
-        id: "mipuy", lecturer: "גב' שירה לפידות וגב' מיכל דיין", 
-        course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", 
-        time: "10:30–9:00", physicalTime: "11:15–10:00", 
-        break: "11:00–10:30", physicalBreak: "11:30–11:15", 
-        zoom: "https://sapir.zoom.us/my/shirasapir", room: "בניין 14, חדר 14102" 
-      },
-      { 
-        id: "hashpaot", lecturer: "גב' ראומה מנצור", 
-        course: "תיאוריה ופרקטיקה של השפעות תרבותיות בישראל", 
-        time: "12:30–11:00", physicalTime: "12:45–11:30", 
-        break: "13:15–12:30", physicalBreak: "13:15–12:45", 
-        zoom: "https://sapir.zoom.us/j/87055276066", room: "בניין 14, חדר 14102" 
-      },
-      { 
-        id: "appel", lecturer: "ד\"ר נדב אפל", 
-        course: "מבטי עומק בתיאוריות של תרבות", 
-        time: "14:45–13:15", physicalTime: "14:30–13:15", 
-        break: "15:15–14:45", physicalBreak: "15:00–14:30 (משותף עם מחזור 6)", 
-        zoom: "https://sapir.zoom.us/my/nadavappel", room: "בניין 14, חדר 14102" 
-      },
-      { 
-        id: "shenkar", lecturer: "ד\"ר יעל שנקר", 
-        course: "מתודולוגיות בחקר תרבות", 
-        time: "16:45–15:15", physicalTime: "16:30–15:00", 
-        break: "", physicalBreak: "", 
-        zoom: "https://sapir.zoom.us/j/5569375877", room: "בניין 14, חדר 14102" 
-      }
+      { id: "mipuy", lecturer: "גב' שירה לפידות וגב' מיכל דיין", course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", time: "10:30–9:00", physicalTime: "11:15–10:00", break: "11:30–11:15", physicalBreak: "11:30–11:15", zoom: "https://sapir.zoom.us/my/shirasapir", room: "בניין 14, חדר 14102" },
+      { id: "hashpaot", lecturer: "גב' ראומה מנצור", course: "תיאוריה ופרקטיקה של השפעות תרבותיות בישראל", time: "12:30–11:00", physicalTime: "12:45–11:30", break: "13:15–12:30", physicalBreak: "13:15–12:45", zoom: "https://sapir.zoom.us/j/87055276066", room: "בניין 14, חדר 14102" },
+      { id: "appel", lecturer: "ד\"ר נדב אפל", course: "מבטי עומק בתיאוריות של תרבות", time: "14:45–13:15", physicalTime: "14:30–13:15", break: "15:15–14:45", physicalBreak: "15:00–14:30 (משותף עם מחזור 6)", zoom: "https://sapir.zoom.us/my/nadavappel", room: "בניין 14, חדר 14102" },
+      { id: "shenkar", lecturer: "ד\"ר יעל שנקר", course: "מתודולוגיות בחקר תרבות", time: "16:45–15:15", physicalTime: "16:30–15:00", break: "", physicalBreak: "", zoom: "https://sapir.zoom.us/j/5569375877", room: "בניין 14, חדר 14102" }
     ];
 
     function getNextWednesday(fromDate){
@@ -186,9 +170,32 @@
                 </div>
               </div>
             </article>`;
-        } else if (match.special) {
+        } 
+        else if (match.special === "custom29") {
+          const customCards = [
+            { lecturer: "גב' שירה לפידות וגב' מיכל דיין", course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", time: "11:15–10:00", break: "11:30–11:15", room: "בניין 14, חדר 14102" },
+            { lecturer: "ד\"ר יעל שנקר", course: "מתודולוגיות בחקר תרבות", time: "12:45–11:30",room: "בניין 14, חדר 14102" },
+            { course: "✨ הפסקה חגיגית משותפת עם מחזור 6 🎉", time: "13:45–12:45", isParty: true },
+            { lecturer: "ד\"ר נדב אפל", course: "מבטי עומק בתיאוריות של תרבות", time: "15:00–13:45", break: "15:30–15:00", room: "בניין 14, חדר 14102" },
+            { lecturer: "גב' ראומה מנצור", course: "תיאוריה ופרקטיקה של השפעות תרבותיות בישראל", time: "17:00–15:30", room: "בניין 14, חדר 14102" }
+          ];
+          customCards.forEach(cls => {
+            const card = document.createElement("article");
+            card.className = `card ${cls.isParty ? 'party-card' : ''}`;
+            card.innerHTML = `
+              ${cls.lecturer ? `<div class="lecturer">${cls.lecturer}</div>` : ""}
+              <div class="course">${cls.course}</div>
+              <div class="time">זמן שיעור: ${cls.time}</div>
+              ${cls.room ? `<div class="room-info">מיקום: ${cls.room}</div>` : ""}
+              ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
+            `;
+            container.appendChild(card);
+          });
+        } 
+        else if (match.special) {
           container.innerHTML = `<article class="card" style="grid-column: 1 / -1; text-align: center;"><h2 style="color: #fde68a;">${match.special}</h2></article>`;
-        } else {
+        } 
+        else {
           const isPhysical = match.type.includes("פיזי");
           courses.forEach(cls => {
             const displayTime = (isPhysical && cls.physicalTime) ? cls.physicalTime : cls.time;
