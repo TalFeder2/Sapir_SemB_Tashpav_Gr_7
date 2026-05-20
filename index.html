@@ -103,7 +103,7 @@
       { day: 6,  month: "מאי", type: "לימודים מקוונים" },
       { day: 13, month: "מאי", type: "לימודים מקוונים" },
       { day: 20, month: "מאי", type: "לימודים מקוונים" },
-      { day: 27, month: "מאי", type: "יום לימודים פיזי" },
+      { day: 27, month: "מאי", type: "יום לימודים פיזי", special: "custom27may" },
       { day: 3,  month: "יוני", type: "לימודים מקוונים" },
       { day: 10, month: "יוני", type: "סיור", special: "סיור" },
       { day: 17,  month: "יוני", type: "לימודים מקוונים" },
@@ -171,6 +171,26 @@
               </div>
             </article>`;
         } 
+        else if (match.special === "custom27may") {
+          const customCards = [
+            { lecturer: "סיור בכפר עזה", course: "מדריכה: רונית איפרגן", time: "12:00–10:00", timeLabel: "זמן", break: "12:30–12:00" },
+            { lecturer: "גב' שירה לפידות וגב' מיכל דיין", course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", time: "13:00–12:30", break: "13:15–13:00", room: "בניין 14, חדר 14102" },
+            { lecturer: "ד\"ר נדב אפל", course: "מבטי עומק בתיאוריות של תרבות", time: "14:30–13:15", break: "15:00–14:30 (משותף עם מחזור 6)", room: "בניין 14, חדר 14102" },
+            { lecturer: "ד\"ר יעל שנקר", course: "מתודולוגיות בחקר תרבות", time: "16:30–15:00", room: "בניין 14, חדר 14102" }
+          ];
+          customCards.forEach(cls => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.innerHTML = `
+              ${cls.lecturer ? `<div class="lecturer">${cls.lecturer}</div>` : ""}
+              <div class="course">${cls.course}</div>
+              <div class="time">${cls.timeLabel || "זמן שיעור"}: ${cls.time}</div>
+              ${cls.room ? `<div class="room-info">מיקום: ${cls.room}</div>` : ""}
+              ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
+            `;
+            container.appendChild(card);
+          });
+        }
         else if (match.special === "custom29") {
           const customCards = [
             { lecturer: "גב' שירה לפידות וגב' מיכל דיין", course: "מיפוי תרבות: במרחב שבין תכנון להשתתפות", time: "11:15–10:00", break: "11:30–11:15", room: "בניין 14, חדר 14102" },
