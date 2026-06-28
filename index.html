@@ -42,6 +42,8 @@
     .break { color:#cbd5e1; font-size:14px; margin:2px 0; }
     .tbd { color:#94a3b8; font-size:14px; font-weight:600; margin:6px 0; }
     .zoom-tbd { color:#94a3b8; font-size:14px; font-weight:600; margin-top:8px; font-style:italic; }
+    .event-card h2{color:#fde68a;margin:0 0 6px;font-size:24px}
+    .event-card p{color:#e2e8f0;font-weight:600;margin:0}
 
     .room-info{color:#fde68a;font-weight:600;font-size:15px;margin:4px 0}
     .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px; text-align: center;}
@@ -91,7 +93,7 @@
       { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7" },
       { day: 9,  month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 8 · לפני חופשת ראש השנה (ו' 11.9 – ב' 14.9)" },
       { day: 16, month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 9 · יום לימודים רגיל — בין ראש השנה ליום כיפור" },
-      { day: 23, month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 10 · אירוע מיפויים" },
+      { day: 23, month: "ספטמבר", type: "אירוע מיפויים", note: "שבוע 10", special: "אירוע מיפויים", specialSub: "אירוע מיפויים יתקיים לאורך כל היום — אין שיעורים רגילים." },
     ];
 
     // מבנה יום לימודים מקוון (התחלה 9:30)
@@ -149,6 +151,16 @@
 
       if (!match) {
         container.innerHTML = `<p style="grid-column: 1 / -1;">אין שיעורים מתוכננים בשבוע זה.</p>`;
+        return;
+      }
+
+      // ימים מיוחדים ללא שיעורים רגילים (למשל אירוע מיפויים)
+      if (match.special) {
+        container.innerHTML = `
+          <article class="card event-card" style="grid-column: 1 / -1;">
+            <h2>${match.special}</h2>
+            ${match.specialSub ? `<p>${match.specialSub}</p>` : ""}
+          </article>`;
         return;
       }
 
