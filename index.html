@@ -30,6 +30,10 @@
     .card{background:#3a4a6a;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(0,0,0,.25); text-align: center;}
     .lecturer{font-weight:700;font-size:18px;margin-bottom:4px}
     .course{color:#dbeafe;font-weight:600;margin:0 0 8px}
+    .combined-tag{color:#fde68a;font-weight:800;font-size:13px;letter-spacing:.5px;margin-bottom:8px}
+    .combined-item{margin:0 0 6px}
+    .combined-item .ci-course{font-weight:700;color:#f1f5f9}
+    .combined-item .ci-lecturer{color:#dbeafe;font-size:14px}
 
     .time, .break {
       font-weight:600;
@@ -100,15 +104,19 @@
     const onlineCourses = [
       { lecturer: 'ד"ר חיים ביטון', course: "לך תזכור – הדיסציפלינה ההיסטורית והסיפור המזרחי בישראל", time: "11:45–9:30",  break: "12:15–11:45", zoom: "" },
       { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "14:30–12:15", break: "15:00–14:30", zoom: "" },
-      { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות",                                            time: "17:00–15:00", break: "",           zoom: "" },
-      { lecturer: "גב' שירה לפידות", course: "תרבות דרומית",                                              time: "",            break: "",           zoom: "" },
+      { group: [
+          { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות" },
+          { lecturer: "גב' שירה לפידות", course: "תרבות דרומית" }
+        ], time: "17:00–15:00", break: "", zoom: "" },
     ];
 
     // מבנה יום לימודים פיזי במכללה (התחלה 10:00)
     const physicalCourses = [
       { lecturer: 'ד"ר חיים ביטון', course: "לך תזכור – הדיסציפלינה ההיסטורית והסיפור המזרחי בישראל", time: "12:00–10:00", break: "12:30–12:00" },
-      { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות",                                            time: "14:00–12:30", break: "" },
-      { lecturer: "גב' שירה לפידות", course: "תרבות דרומית",                                              time: "",            break: "14:30–14:00" },
+      { group: [
+          { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות" },
+          { lecturer: "גב' שירה לפידות", course: "תרבות דרומית" }
+        ], time: "14:00–12:30", break: "14:30–14:00" },
       { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "16:30–14:30", break: "" },
     ];
 
@@ -170,9 +178,26 @@
       list.forEach(cls => {
         const card = document.createElement("article");
         card.className = "card";
+
+        let head;
+        if (cls.group) {
+          head = `
+            <div class="combined-tag">שיעור משולב</div>
+            ${cls.group.map(g => `
+              <div class="combined-item">
+                <div class="ci-course">${g.course}</div>
+                <div class="ci-lecturer">${g.lecturer}</div>
+              </div>`).join("")}
+          `;
+        } else {
+          head = `
+            <div class="lecturer">${cls.lecturer}</div>
+            <div class="course">${cls.course}</div>
+          `;
+        }
+
         card.innerHTML = `
-          <div class="lecturer">${cls.lecturer}</div>
-          <div class="course">${cls.course}</div>
+          ${head}
           ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
           ${isPhysical ? `<div class="room-info">מיקום: ${ROOM_TBD}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
