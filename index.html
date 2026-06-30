@@ -120,7 +120,7 @@
       { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "16:30–14:30", break: "" },
     ];
 
-    const ROOM_TBD = "ייקבע בהמשך";
+    const ROOM = "כיתה 14102";
 
     function getNextWednesday(fromDate){
       const d = new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
@@ -199,7 +199,7 @@
         card.innerHTML = `
           ${head}
           ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
-          ${isPhysical ? `<div class="room-info">מיקום: ${ROOM_TBD}</div>` : ""}
+          ${isPhysical ? `<div class="room-info">מיקום: ${ROOM}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
           ${!isPhysical ? (cls.zoom ? `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
         `;
