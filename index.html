@@ -89,9 +89,9 @@
     // מבנה הסמסטר – סמסטר קיץ תשפ"ו (כל המפגשים בימי רביעי)
     const schedule = [
       { day: 22, month: "יולי",   type: "לימודים מקוונים",  note: "שבוע 1 · ערב תשעה באב" },
-      { day: 29, month: "יולי",   type: "יום לימודים פיזי", note: "שבוע 2" },
+      { day: 29, month: "יולי",   type: "יום לימודים פיזי", note: "שבוע 2", physicalVariant: "workshop" },
       { day: 5,  month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 3" },
-      { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4" },
+      { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4", physicalVariant: "workshop" },
       { day: 19, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 5" },
       { day: 26, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 6" },
       { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7" },
@@ -121,6 +121,7 @@
     ];
 
     const ROOM = "כיתה 14102";
+    const WORKSHOP = { course: "סדנת תרבות וחוסן", time: "14:00–12:30", break: "14:30–14:00" };
 
     function getNextWednesday(fromDate){
       const d = new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
@@ -173,7 +174,10 @@
       }
 
       const isPhysical = match.type.includes("פיזי");
-      const list = isPhysical ? physicalCourses : onlineCourses;
+      let list = isPhysical ? physicalCourses : onlineCourses;
+      if (isPhysical && match.physicalVariant === "workshop") {
+        list = physicalCourses.map(c => c.group ? WORKSHOP : c);
+      }
 
       list.forEach(cls => {
         const card = document.createElement("article");
@@ -191,7 +195,7 @@
           `;
         } else {
           head = `
-            <div class="lecturer">${cls.lecturer}</div>
+            ${cls.lecturer ? `<div class="lecturer">${cls.lecturer}</div>` : `<div class="combined-tag">סדנה</div>`}
             <div class="course">${cls.course}</div>
           `;
         }
