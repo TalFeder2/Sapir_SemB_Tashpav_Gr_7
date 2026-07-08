@@ -94,7 +94,7 @@
       { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4", physicalVariant: "workshop" },
       { day: 19, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 5" },
       { day: 26, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 6" },
-      { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7" },
+      { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7", physicalVariant: "swapChaimDavid" },
       { day: 9,  month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 8 · לפני חופשת ראש השנה (ו' 11.9 – ב' 14.9)" },
       { day: 16, month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 9 · יום לימודים רגיל — בין ראש השנה ליום כיפור" },
       { day: 23, month: "ספטמבר", type: "אירוע מיפויים", note: "שבוע 10", special: "אירוע מיפויים", specialSub: "אירוע מיפויים יתקיים לאורך כל היום — אין שיעורים רגילים." },
@@ -177,6 +177,15 @@
       let list = isPhysical ? physicalCourses : onlineCourses;
       if (isPhysical && match.physicalVariant === "workshop") {
         list = physicalCourses.map(c => c.group ? WORKSHOP : c);
+      }
+      if (isPhysical && match.physicalVariant === "swapChaimDavid") {
+        const chaim = physicalCourses.find(c => c.lecturer && c.lecturer.includes("ביטון"));
+        const david = physicalCourses.find(c => c.lecturer && c.lecturer.includes("פרץ"));
+        list = physicalCourses.map(c => {
+          if (c === chaim) return { ...david, time: chaim.time, break: chaim.break };
+          if (c === david) return { ...chaim, time: david.time, break: david.break };
+          return c;
+        });
       }
 
       list.forEach(cls => {
