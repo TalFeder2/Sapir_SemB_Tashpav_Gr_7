@@ -56,6 +56,7 @@
     .event-highlight .ev-detail{margin:3px 0;font-weight:600;line-height:1.5}
     .event-highlight .ev-loc{margin-top:10px;font-weight:800}
     .event-highlight .ev-note{margin-top:6px;font-size:14px;opacity:.92}
+    .event-highlight .ev-register{margin-top:14px;width:auto;padding:11px 22px}
 
     .room-info{color:#fde68a;font-weight:600;font-size:15px;margin:4px 0}
     .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px; text-align: center;}
@@ -109,7 +110,8 @@
               "סדנאות כתיבה בהנחיית: גלית דהן-קרליבך · אפרת רפל-פראוי"
             ],
             location: "מתחם ה‑X-LAB · המכללה האקדמית ספיר",
-            note: "המפגש ללא עלות · בהרשמה מראש"
+            note: "המפגש ללא עלות · בהרשמה מראש",
+            register: "https://forms.gle/NAJTbMzQwesA1z1n7"
           }
         ] },
       { day: 5,  month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 3" },
@@ -253,6 +255,7 @@
             ${(ev.details || []).map(d => `<div class="ev-detail">${d}</div>`).join("")}
             ${ev.location ? `<div class="ev-loc">📍 ${ev.location}</div>` : ""}
             ${ev.note ? `<div class="ev-note">${ev.note}</div>` : ""}
+            ${ev.register ? `<a class="btn ev-register" href="${ev.register}" target="_blank">📝 להרשמה לחצו כאן</a>` : ""}
           `;
           container.appendChild(card);
         });
