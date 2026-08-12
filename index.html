@@ -115,10 +115,10 @@
           }
         ] },
       { day: 5,  month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 3" },
-      { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4", physicalVariant: "workshop" },
+      { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4", physicalVariant: "workshop", rooms: ["בניין 14, חדר 14102", "בניין 15, חדר 15012", "בניין 14, חדר 14102"] },
       { day: 19, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 5" },
       { day: 26, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 6" },
-      { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7", physicalVariant: "swapChaimDavid" },
+      { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7", physicalVariant: "swapChaimDavid", rooms: ["בניין 14, חדר 14104", "בניין 14, חדר 14104", "בניין 14, חדר 14104"] },
       { day: 9,  month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 8 · לפני חופשת ראש השנה (ו' 11.9 – ב' 14.9)" },
       { day: 16, month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 9 · יום לימודים רגיל — בין ראש השנה ליום כיפור" },
       { day: 23, month: "ספטמבר", type: "אירוע מיפויים", note: "שבוע 10", special: "אירוע מיפויים", specialSub: "אירוע מיפויים יתקיים לאורך כל היום — אין שיעורים רגילים." },
@@ -144,7 +144,7 @@
       { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "16:30–14:30", break: "" },
     ];
 
-    const ROOM = "בניין 11, חדר 11204";
+    const ROOM = "כיתה 14102";
     const WORKSHOP = { course: "סדנת תרבות וחוסן", time: "14:00–12:30", break: "14:30–14:00" };
 
     function getNextWednesday(fromDate){
@@ -211,6 +211,9 @@
           return c;
         });
       }
+      if (isPhysical && match.rooms) {
+        list = list.map((c, i) => match.rooms[i] !== undefined ? { ...c, room: match.rooms[i] } : c);
+      }
 
       list.forEach(cls => {
         const card = document.createElement("article");
@@ -236,7 +239,7 @@
         card.innerHTML = `
           ${head}
           ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
-          ${isPhysical ? `<div class="room-info">מיקום: ${ROOM}</div>` : ""}
+          ${isPhysical ? `<div class="room-info">מיקום: ${cls.room || ROOM}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
           ${!isPhysical ? (cls.zoom ? `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
         `;
