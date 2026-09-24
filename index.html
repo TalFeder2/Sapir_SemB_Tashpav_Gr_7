@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>מערכת שעות | סמסטר קיץ תשפ"ו | מחזור 7</title>
+  <title>מערכת שעות | סמסטר א' תשפ"ז | מחזור 7</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     body{margin:0;font-family:'Heebo',sans-serif;background:#2b3a59;color:#f1f5f9;text-align:center;direction:rtl}
@@ -71,7 +71,7 @@
     <img src="Sapir_new_logo.svg.png" alt="לוגו ספיר" class="logo" />
     <div class="subheader">תואר שני בלימודי תרבות - מנהיגות ויזמות בתרבות</div>
     <h1>מערכת שעות | מחזור 7</h1>
-    <div class="sem-label">סמסטר קיץ תשפ"ו</div>
+    <div class="sem-label">סמסטר א' תשפ"ז</div>
   </header>
 
   <section class="next">
@@ -87,15 +87,15 @@
 
   <section id="schedule" class="grid"></section>
 
-  <a class="floating-btn" href="https://docs.google.com/document/d/1ggiwuqmxQImb9vuWOHQXh9k6IZLkbGdh/edit?usp=sharing" target="_blank">📄 לוח זמנים מלא</a>
+  <a class="floating-btn" href="https://docs.google.com/document/d/1ZoeSzfyHQpN37GUuV_2kZNMAeBMVU7kZ/edit?usp=sharing" target="_blank">📄 לוח זמנים מלא</a>
 
-  <footer>© 2026 מערכת שעות | עדכון אחרון: 28/6/26</footer>
+  <footer>© 2026 מערכת שעות | עדכון אחרון: 23/9/26</footer>
 
   <script>
     const heMonths = ["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
     const YEAR = 2026;
 
-    // מבנה הסמסטר – סמסטר קיץ תשפ"ו (כל המפגשים בימי רביעי)
+    // מבנה הסמסטר – סמסטר א' תשפ"ז (כרגע עם נתוני הקיץ עד לעדכון) (כל המפגשים בימי רביעי)
     const schedule = [
       { day: 22, month: "יולי",   type: "לימודים מקוונים",  note: "שבוע 1 · ערב תשעה באב" },
       { day: 29, month: "יולי",   type: "יום לימודים פיזי", note: "שבוע 2", physicalVariant: "workshop",
@@ -187,7 +187,6 @@
         return;
       }
 
-      // ימים מיוחדים ללא שיעורים רגילים (למשל אירוע מיפויים)
       if (match.special) {
         container.innerHTML = `
           <article class="card event-card" style="grid-column: 1 / -1;">
