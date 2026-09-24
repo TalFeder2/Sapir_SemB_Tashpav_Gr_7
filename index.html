@@ -30,10 +30,6 @@
     .card{background:#3a4a6a;border-radius:18px;padding:18px;box-shadow:0 8px 18px rgba(0,0,0,.25); text-align: center;}
     .lecturer{font-weight:700;font-size:18px;margin-bottom:4px}
     .course{color:#dbeafe;font-weight:600;margin:0 0 8px}
-    .combined-tag{color:#fde68a;font-weight:800;font-size:13px;letter-spacing:.5px;margin-bottom:8px}
-    .combined-item{margin:0 0 6px}
-    .combined-item .ci-course{font-weight:700;color:#f1f5f9}
-    .combined-item .ci-lecturer{color:#dbeafe;font-size:14px}
 
     .time, .break {
       font-weight:600;
@@ -48,15 +44,7 @@
     .zoom-tbd { color:#94a3b8; font-size:14px; font-weight:600; margin-top:8px; font-style:italic; }
     .event-card h2{color:#fde68a;margin:0 0 6px;font-size:24px}
     .event-card p{color:#e2e8f0;font-weight:600;margin:0}
-    .event-highlight{grid-column:1/-1;background:linear-gradient(135deg,#7c3aed 0%,#2563eb 55%,#38bdf8 100%);color:#fff;border-radius:18px;padding:22px;box-shadow:0 12px 26px rgba(124,58,237,.4)}
-    .event-highlight .ev-series{font-size:13px;font-weight:800;letter-spacing:.5px;opacity:.92;margin-bottom:6px}
-    .event-highlight .ev-title{font-size:23px;font-weight:800;margin:0 0 4px}
-    .event-highlight .ev-tagline{font-size:14px;font-weight:700;color:#fde68a;margin:0 0 10px}
-    .event-highlight .ev-time{font-weight:800;font-size:18px;color:#fde68a;direction:ltr;unicode-bidi:isolate;margin-bottom:10px}
-    .event-highlight .ev-detail{margin:3px 0;font-weight:600;line-height:1.5}
-    .event-highlight .ev-loc{margin-top:10px;font-weight:800}
-    .event-highlight .ev-note{margin-top:6px;font-size:14px;opacity:.92}
-    .event-highlight .ev-register{margin-top:14px;width:auto;padding:11px 22px}
+    .note-badge{display:inline-block;background:#fde68a;color:#1e293b;font-weight:800;font-size:13px;border-radius:10px;padding:4px 12px;margin:0 auto 14px}
 
     .room-info{color:#fde68a;font-weight:600;font-size:15px;margin:4px 0}
     .btn{display:inline-block;width:90%;padding:10px 12px;border-radius:10px;text-decoration:none;color:#00131a;font-weight:800;background:linear-gradient(90deg,#38bdf8,#22d3ee);transition:transform .1s ease;margin-top:8px; text-align: center;}
@@ -89,63 +77,47 @@
 
   <a class="floating-btn" href="https://docs.google.com/document/d/1ZoeSzfyHQpN37GUuV_2kZNMAeBMVU7kZ/edit?usp=sharing" target="_blank">📄 לוח זמנים מלא</a>
 
-  <footer>© 2026 מערכת שעות | עדכון אחרון: 23/9/26</footer>
+  <footer>© 2026 מערכת שעות | עדכון אחרון: 24/9/26</footer>
 
   <script>
     const heMonths = ["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
     const YEAR = 2026;
 
-    // מבנה הסמסטר – סמסטר א' תשפ"ז (כרגע עם נתוני הקיץ עד לעדכון) (כל המפגשים בימי רביעי)
+    // מבנה הסמסטר – סמסטר א' תשפ"ז (כל המפגשים בימי רביעי)
     const schedule = [
-      { day: 22, month: "יולי",   type: "לימודים מקוונים",  note: "שבוע 1 · ערב תשעה באב" },
-      { day: 29, month: "יולי",   type: "יום לימודים פיזי", note: "שבוע 2", physicalVariant: "workshop",
-        events: [
-          {
-            series: "מבט · סדרת מפגשים בין תרבות, קהילה ואקדמיה",
-            title: "מפגש: כתיבה, השראה ושיח ספרות",
-            tagline: "פלאי המבט המשתהה",
-            time: "16:30",
-            details: [
-              "פרופ' עומרי הרצוג בשיחה עם פרופ' נורית גרץ-קינן",
-              "סדנאות כתיבה בהנחיית: גלית דהן-קרליבך · אפרת רפל-פראוי"
-            ],
-            location: "מתחם ה‑X-LAB · המכללה האקדמית ספיר",
-            note: "המפגש ללא עלות · בהרשמה מראש",
-            register: "https://forms.gle/NAJTbMzQwesA1z1n7"
-          }
-        ] },
-      { day: 5,  month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 3" },
-      { day: 12, month: "אוגוסט", type: "יום לימודים פיזי", note: "שבוע 4", physicalVariant: "workshop", rooms: ["בניין 14, חדר 14102", "בניין 15, חדר 15012", "בניין 14, חדר 14102"] },
-      { day: 19, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 5" },
-      { day: 26, month: "אוגוסט", type: "לימודים מקוונים",  note: "שבוע 6" },
-      { day: 2,  month: "ספטמבר", type: "יום לימודים פיזי", note: "שבוע 7", physicalVariant: "swapChaimDavid", rooms: ["בניין 14, חדר 14104", "בניין 14, חדר 14104", "בניין 14, חדר 14104"], replaceGroup: { lecturer: 'ד"ר טל פדר', course: "תרבות וחוסן - הרצאה ודיון", time: "14:00–12:30", break: "14:30–14:00" } },
-      { day: 9,  month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 8 · לפני חופשת ראש השנה (ו' 11.9 – ב' 14.9)" },
-      { day: 16, month: "ספטמבר", type: "לימודים מקוונים",  note: "שבוע 9 · יום לימודים רגיל — בין ראש השנה ליום כיפור" },
-      { day: 23, month: "ספטמבר", type: "אירוע מיפויים", note: "שבוע 10", special: "אירוע מיפויים", specialSub: "אירוע מיפויים יתקיים לאורך כל היום — אין שיעורים רגילים." },
+      { day: 21, month: "אוקטובר", year: 2026, type: "יום לימודים פיזי", note: "שבוע 1 · פתיחת סמסטר חגיגית" },
+      { day: 28, month: "אוקטובר", year: 2026, type: "לימודים מקוונים",  note: "שבוע 2 · אירוע מיפויים (מקוון)" },
+      { day: 4,  month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 3" },
+      { day: 11, month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 4" },
+      { day: 18, month: "נובמבר",  year: 2026, type: "יום לימודים פיזי", note: "שבוע 5 · כנס שנתי" },
+      { day: 25, month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 6" },
+      { day: 2,  month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 7" },
+      { day: 9,  month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 8" },
+      { day: 16, month: "דצמבר",   year: 2026, type: "יום לימודים פיזי", note: "שבוע 9" },
+      { day: 23, month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 10" },
+      { day: 30, month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 11" },
+      { day: 6,  month: "ינואר",   year: 2027, type: "לימודים מקוונים",  note: "שבוע 12" },
+      { day: 13, month: "ינואר",   year: 2027, type: "יום לימודים פיזי", note: "שבוע 13 · סיור" },
+      { day: 20, month: "ינואר",   year: 2027, type: "לימודים מקוונים",  note: "שמור לשיעורי השלמה" },
     ];
 
-    // מבנה יום לימודים מקוון (התחלה 9:30)
+    // מבנה יום לימודים מקוון (התחלה 9:00)
     const onlineCourses = [
-      { lecturer: 'ד"ר חיים ביטון', course: "מכור היתוך לסכסוך: היסטוריה, פוסט ציונות והשיח המזרחי בישראל", time: "11:45–9:30",  break: "12:15–11:45", zoom: "https://sapir.zoom.us/j/89359822467" },
-      { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "14:30–12:15", break: "15:00–14:30", zoom: "https://sapir.zoom.us/j/82324674097" },
-      { group: [
-          { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות" },
-          { lecturer: "גב' שירה לפידות", course: "תרבות דרומית" }
-        ], time: "17:00–15:00", break: "", zoom: "https://sapir.zoom.us/my/michaldayan" },
+      { lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00",  break: "11:00–10:30", zoom: "" },
+      { lecturer: 'ד"ר טל פדר',            course: "מחקר בניהול ומדיניות תרבות",        time: "12:30–11:00", break: "13:15–12:30", zoom: "" },
+      { lecturer: "פרופ' עמרי הרצוג",       course: "תרבות בלא נחת",                      time: "16:15–13:15", break: "16:45–16:15", zoom: "" },
+      { lecturer: "גב' מיכל דיין",          course: "המעבדה לתרבות",                      time: "19:45–16:45", break: "",           zoom: "" },
     ];
 
     // מבנה יום לימודים פיזי במכללה (התחלה 10:00)
     const physicalCourses = [
-      { lecturer: 'ד"ר חיים ביטון', course: "מכור היתוך לסכסוך: היסטוריה, פוסט ציונות והשיח המזרחי בישראל", time: "12:00–10:00", break: "12:30–12:00" },
-      { group: [
-          { lecturer: "גב' מיכל דיין",   course: "לספר היסטוריות" },
-          { lecturer: "גב' שירה לפידות", course: "תרבות דרומית" }
-        ], time: "14:00–12:30", break: "14:30–14:00" },
-      { lecturer: "מר דוד פרץ",      course: "השתלבות והיסטורית הזמר של יוצאי ארצות האסלאם בישראל",      time: "16:30–14:30", break: "" },
+      { lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "11:15–10:00", break: "11:45–11:15" },
+      { lecturer: 'ד"ר טל פדר',            course: "מחקר בניהול ומדיניות תרבות",        time: "13:00–11:45", break: "13:30–13:00" },
+      { lecturer: "פרופ' עמרי הרצוג",       course: "תרבות בלא נחת",                      time: "16:15–13:30", break: "16:45–16:15" },
+      { lecturer: "גב' מיכל דיין",          course: "המעבדה לתרבות",                      time: "19:00–16:45", break: "" },
     ];
 
-    const ROOM = "כיתה 14102";
-    const WORKSHOP = { course: "סדנת תרבות וחוסן", time: "14:00–12:30", break: "14:30–14:00" };
+    const ROOM = "יתפרסם בהמשך";
 
     function getNextWednesday(fromDate){
       const d = new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
@@ -159,12 +131,11 @@
       const today = new Date();
       today.setHours(0,0,0,0);
       for (const e of schedule){
-        const m = heMonths.indexOf(e.month);
-        const d = new Date(YEAR, m, e.day);
+        const d = new Date(e.year || YEAR, heMonths.indexOf(e.month), e.day);
         if (d >= today) return d;
       }
       const first = schedule[0];
-      return new Date(YEAR, heMonths.indexOf(first.month), first.day);
+      return new Date(first.year || YEAR, heMonths.indexOf(first.month), first.day);
     }
 
     let currentDateToView = findInitialView();
@@ -197,49 +168,14 @@
       }
 
       const isPhysical = match.type.includes("פיזי");
-      let list = isPhysical ? physicalCourses : onlineCourses;
-      if (isPhysical && match.physicalVariant === "workshop") {
-        list = physicalCourses.map(c => c.group ? WORKSHOP : c);
-      }
-      if (isPhysical && match.physicalVariant === "swapChaimDavid") {
-        const chaim = physicalCourses.find(c => c.lecturer && c.lecturer.includes("ביטון"));
-        const david = physicalCourses.find(c => c.lecturer && c.lecturer.includes("פרץ"));
-        list = physicalCourses.map(c => {
-          if (c === chaim) return { ...david, time: chaim.time, break: chaim.break };
-          if (c === david) return { ...chaim, time: david.time, break: david.break };
-          return c;
-        });
-      }
-      if (isPhysical && match.replaceGroup) {
-        list = list.map(c => c.group ? match.replaceGroup : c);
-      }
-      if (isPhysical && match.rooms) {
-        list = list.map((c, i) => match.rooms[i] !== undefined ? { ...c, room: match.rooms[i] } : c);
-      }
+      const list = isPhysical ? physicalCourses : onlineCourses;
 
       list.forEach(cls => {
         const card = document.createElement("article");
         card.className = "card";
-
-        let head;
-        if (cls.group) {
-          head = `
-            <div class="combined-tag">שיעור משולב</div>
-            ${cls.group.map(g => `
-              <div class="combined-item">
-                <div class="ci-course">${g.course}</div>
-                <div class="ci-lecturer">${g.lecturer}</div>
-              </div>`).join("")}
-          `;
-        } else {
-          head = `
-            ${cls.lecturer ? `<div class="lecturer">${cls.lecturer}</div>` : `<div class="combined-tag">סדנה</div>`}
-            <div class="course">${cls.course}</div>
-          `;
-        }
-
         card.innerHTML = `
-          ${head}
+          <div class="lecturer">${cls.lecturer}</div>
+          <div class="course">${cls.course}</div>
           ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
           ${isPhysical ? `<div class="room-info">מיקום: ${cls.room || ROOM}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
@@ -247,24 +183,6 @@
         `;
         container.appendChild(card);
       });
-
-      if (match.events) {
-        match.events.forEach(ev => {
-          const card = document.createElement("article");
-          card.className = "card event-highlight";
-          card.innerHTML = `
-            <div class="ev-series">${ev.series}</div>
-            <div class="ev-title">${ev.title}</div>
-            ${ev.tagline ? `<div class="ev-tagline">— ${ev.tagline} —</div>` : ""}
-            <div class="ev-time">🕓 ${ev.time}</div>
-            ${(ev.details || []).map(d => `<div class="ev-detail">${d}</div>`).join("")}
-            ${ev.location ? `<div class="ev-loc">📍 ${ev.location}</div>` : ""}
-            ${ev.note ? `<div class="ev-note">${ev.note}</div>` : ""}
-            ${ev.register ? `<a class="btn ev-register" href="${ev.register}" target="_blank">📝 להרשמה לחצו כאן</a>` : ""}
-          `;
-          container.appendChild(card);
-        });
-      }
     }
 
     renderSchedule(currentDateToView);
