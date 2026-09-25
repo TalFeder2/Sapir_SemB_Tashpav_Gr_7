@@ -85,11 +85,22 @@
 
     // מבנה הסמסטר – סמסטר א' תשפ"ז (כל המפגשים בימי רביעי)
     const schedule = [
-      { day: 21, month: "אוקטובר", year: 2026, type: "יום לימודים פיזי", note: "שבוע 1 · פתיחת סמסטר חגיגית" },
-      { day: 28, month: "אוקטובר", year: 2026, type: "לימודים מקוונים",  note: "שבוע 2 · אירוע מיפויים (מקוון)" },
+      { day: 21, month: "אוקטובר", year: 2026, type: "יום לימודים פיזי", note: "שבוע 1 · פתיחת סמסטר חגיגית",
+        customCards: [
+          { type: "class", lecturer: 'ד"ר טל פדר', course: "מחקר בניהול ומדיניות תרבות", time: "11:15–10:00", break: "11:45–11:15" },
+          { type: "class", lecturer: 'ד"ר טל פדר', course: "מחקר בניהול ומדיניות תרבות", time: "13:00–11:45", break: "13:30–13:00" },
+          { type: "class", lecturer: "פרופ' עמרי הרצוג", course: "תרבות בלא נחת", time: "16:15–13:30", break: "16:45–16:15" },
+          { type: "class", lecturer: "גב' מיכל דיין", course: "המעבדה לתרבות", time: "19:00–16:45", break: "" },
+        ] },
+      { day: 28, month: "אוקטובר", year: 2026, type: "לימודים מקוונים",  note: "שבוע 2 · אירוע מיפויים (מקוון)",
+        customCards: [
+          { type: "class", lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00", break: "11:00–10:30", zoom: "" },
+          { type: "class", lecturer: "פרופ' עמרי הרצוג", course: "תרבות בלא נחת", time: "14:00–11:00", break: "14:30–14:00", zoom: "" },
+          { type: "event", title: "אירוע מיפויים", time: "19:45–14:30" },
+        ] },
       { day: 4,  month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 3" },
       { day: 11, month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 4" },
-      { day: 18, month: "נובמבר",  year: 2026, type: "יום לימודים פיזי", note: "שבוע 5 · כנס שנתי" },
+      { day: 18, month: "נובמבר",  year: 2026, type: "יום לימודים פיזי", note: "שבוע 5 · כנס שנתי", special: "כנס שנתי", specialSub: "יום הכנס — לא יתקיימו שיעורים רגילים." },
       { day: 25, month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 6" },
       { day: 2,  month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 7" },
       { day: 9,  month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 8" },
@@ -97,7 +108,7 @@
       { day: 23, month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 10" },
       { day: 30, month: "דצמבר",   year: 2026, type: "לימודים מקוונים",  note: "שבוע 11" },
       { day: 6,  month: "ינואר",   year: 2027, type: "לימודים מקוונים",  note: "שבוע 12" },
-      { day: 13, month: "ינואר",   year: 2027, type: "יום לימודים פיזי", note: "שבוע 13 · סיור" },
+      { day: 13, month: "ינואר",   year: 2027, type: "יום לימודים פיזי", note: "שבוע 13 · סיור", special: "סיור", specialSub: "יום סיור — לא יתקיימו לימודים רגילים." },
       { day: 20, month: "ינואר",   year: 2027, type: "לימודים מקוונים",  note: "שמור לשיעורי השלמה" },
     ];
 
@@ -158,6 +169,7 @@
         return;
       }
 
+      // ימים מיוחדים ללא שיעורים רגילים (אם מוגדר special)
       if (match.special) {
         container.innerHTML = `
           <article class="card event-card" style="grid-column: 1 / -1;">
@@ -168,6 +180,31 @@
       }
 
       const isPhysical = match.type.includes("פיזי");
+
+      // ימים עם לו"ז מיוחד חד-פעמי
+      if (match.customCards) {
+        match.customCards.forEach(c => {
+          const card = document.createElement("article");
+          if (c.type === "event") {
+            card.className = "card event-card";
+            card.style.gridColumn = "1 / -1";
+            card.innerHTML = `<h2>${c.title}</h2>${c.time ? `<div class="time" style="color:#fde68a;margin-top:6px">${c.time}</div>` : ""}${c.sub ? `<p>${c.sub}</p>` : ""}`;
+          } else {
+            card.className = "card";
+            card.innerHTML = `
+              <div class="lecturer">${c.lecturer}</div>
+              <div class="course">${c.course}</div>
+              ${c.time ? `<div class="time">זמן שיעור: ${c.time}</div>` : ""}
+              ${isPhysical ? `<div class="room-info">מיקום: ${c.room || ROOM}</div>` : ""}
+              ${c.break ? `<div><span class="break">${c.break} :הפסקה</span></div>` : ""}
+              ${!isPhysical ? (c.zoom ? `<a class="btn" href="${c.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
+            `;
+          }
+          container.appendChild(card);
+        });
+        return;
+      }
+
       const list = isPhysical ? physicalCourses : onlineCourses;
 
       list.forEach(cls => {
