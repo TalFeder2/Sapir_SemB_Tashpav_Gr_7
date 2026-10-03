@@ -93,8 +93,8 @@
         ] },
       { day: 28, month: "אוקטובר", year: 2026, type: "לימודים מקוונים",  note: "שבוע 2 · אירוע מיפויים (מקוון)",
         customCards: [
-          { type: "class", lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00", break: "11:00–10:30", zoom: "" },
-          { type: "class", lecturer: "פרופ' עמרי הרצוג", course: "תרבות בלא נחת", time: "14:00–11:00", break: "14:30–14:00", zoom: "" },
+          { type: "class", lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00", break: "11:00–10:30", zoom: "https://sapir.zoom.us/j/9815624469" },
+          { type: "class", lecturer: "פרופ' עמרי הרצוג", course: "תרבות בלא נחת", time: "14:00–11:00", break: "14:30–14:00", zoom: "https://sapir.zoom.us/j/83489586532" },
           { type: "event", title: "אירוע מיפויים", time: "19:45–14:30" },
         ] },
       { day: 4,  month: "נובמבר",  year: 2026, type: "לימודים מקוונים",  note: "שבוע 3" },
@@ -113,9 +113,9 @@
 
     // מבנה יום לימודים מקוון (התחלה 9:00)
     const onlineCourses = [
-      { lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00",  break: "11:00–10:30", zoom: "" },
-      { lecturer: 'ד"ר טל פדר',            course: "מחקר בניהול ומדיניות תרבות",        time: "12:30–11:00", break: "13:15–12:30", zoom: "" },
-      { lecturer: "פרופ' עמרי הרצוג",       course: "תרבות בלא נחת",                      time: "16:15–13:15", break: "16:45–16:15", zoom: "" },
+      { lecturer: "פרופ' ליאת שטייר לבני", course: "דינמיקות של זיכרון: הנצחה והשכחה", time: "10:30–9:00",  break: "11:00–10:30", zoom: "https://sapir.zoom.us/j/9815624469" },
+      { lecturer: 'ד"ר טל פדר',            course: "מחקר בניהול ומדיניות תרבות",        time: "12:30–11:00", break: "13:15–12:30", zoom: "https://sapir.zoom.us/j/87555729727" },
+      { lecturer: "פרופ' עמרי הרצוג",       course: "תרבות בלא נחת",                      time: "16:15–13:15", break: "16:45–16:15", zoom: "https://sapir.zoom.us/j/83489586532" },
       { lecturer: "גב' מיכל דיין",          course: "המעבדה לתרבות",                      time: "19:45–16:45", break: "",           zoom: "" },
     ];
 
@@ -168,6 +168,7 @@
         return;
       }
 
+      // ימים מיוחדים ללא שיעורים רגילים (אם מוגדר special)
       if (match.special) {
         container.innerHTML = `
           <article class="card event-card" style="grid-column: 1 / -1;">
@@ -179,6 +180,7 @@
 
       const isPhysical = match.type.includes("פיזי");
 
+      // ימים עם לו"ז מיוחד חד-פעמי
       if (match.customCards) {
         match.customCards.forEach(c => {
           const card = document.createElement("article");
