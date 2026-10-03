@@ -136,7 +136,7 @@
       return d;
     }
 
-    // ברירת מחדל: המפגש הקרוב ביותר מהיום והלאה (אחרת – המפגשים הראשון)
+    // ברירת מחדל: המפגש הקרוב ביותר מהיום והלאה (אחרת – המפגש הראשון)
     function findInitialView(){
       const today = new Date();
       today.setHours(0,0,0,0);
@@ -191,7 +191,7 @@
             card.innerHTML = `
               <div class="lecturer">${c.lecturer}</div>
               <div class="course">${c.course}</div>
-              ${c.time ? `<div class="time">זמן שיעוק: ${c.time}</div>` : ""}
+              ${c.time ? `<div class="time">זמן שיעור: ${c.time}</div>` : ""}
               ${isPhysical ? `<div class="room-info">מיקום: ${c.room || ROOM}</div>` : ""}
               ${c.break ? `<div><span class="break">${c.break} :הפסקה</span></div>` : ""}
               ${!isPhysical ? (c.zoom ? `<a class="btn" href="${c.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
@@ -210,7 +210,7 @@
         card.innerHTML = `
           <div class="lecturer">${cls.lecturer}</div>
           <div class="course">${cls.course}</div>
-          ${cls.time ? `<div class="time">זמן שיעוק: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
+          ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
           ${isPhysical ? `<div class="room-info">מיקום: ${cls.room || ROOM}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
           ${!isPhysical ? (cls.zoom ? `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
