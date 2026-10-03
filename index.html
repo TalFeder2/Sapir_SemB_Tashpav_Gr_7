@@ -85,12 +85,11 @@
 
     // מבנה הסמסטר – סמסטר א' תשפ"ז (כל המפגשים בימי רביעי)
     const schedule = [
-      { day: 21, month: "אוקטובר", year: 2026, type: "יום לימודים פיזי", note: "שבוע 1 · פתיחת סמסטר חגיגית",
+      { day: 21, month: "אוקטובר", year: 2026, type: "יום לימודים פיזי", note: "שבוע 1 · פתיחת סמסטר",
         customCards: [
-          { type: "class", lecturer: 'ד"ר טל פדר', course: "מחקר בניהול ומדיניות תרבות", time: "11:15–10:00", break: "11:45–11:15" },
-          { type: "class", lecturer: 'ד"ר טל פדר', course: "מחקר בניהול ומדיניות תרבות", time: "13:00–11:45", break: "13:30–13:00" },
+          { type: "class", lecturer: "גב' מיכל דיין", course: "המעבדה לתרבות - סדנת פיתוח מקצועי", time: "13:00–10:00", break: "13:30–13:00" },
           { type: "class", lecturer: "פרופ' עמרי הרצוג", course: "תרבות בלא נחת", time: "16:15–13:30", break: "16:45–16:15" },
-          { type: "class", lecturer: "גב' מיכל דיין", course: "המעבדה לתרבות", time: "19:00–16:45", break: "" },
+          { type: "class", lecturer: 'ד"ר טל פדר', course: "מחקר בניהול ומדיניות תרבות", time: "19:00–16:45", break: "" },
         ] },
       { day: 28, month: "אוקטובר", year: 2026, type: "לימודים מקוונים",  note: "שבוע 2 · אירוע מיפויים (מקוון)",
         customCards: [
@@ -137,7 +136,7 @@
       return d;
     }
 
-    // ברירת מחדל: המפגש הקרוב ביותר מהיום והלאה (אחרת – המפגש הראשון)
+    // ברירת מחדל: המפגש הקרוב ביותר מהיום והלאה (אחרת – המפגשים הראשון)
     function findInitialView(){
       const today = new Date();
       today.setHours(0,0,0,0);
@@ -169,7 +168,6 @@
         return;
       }
 
-      // ימים מיוחדים ללא שיעורים רגילים (אם מוגדר special)
       if (match.special) {
         container.innerHTML = `
           <article class="card event-card" style="grid-column: 1 / -1;">
@@ -181,7 +179,6 @@
 
       const isPhysical = match.type.includes("פיזי");
 
-      // ימים עם לו"ז מיוחד חד-פעמי
       if (match.customCards) {
         match.customCards.forEach(c => {
           const card = document.createElement("article");
@@ -194,7 +191,7 @@
             card.innerHTML = `
               <div class="lecturer">${c.lecturer}</div>
               <div class="course">${c.course}</div>
-              ${c.time ? `<div class="time">זמן שיעור: ${c.time}</div>` : ""}
+              ${c.time ? `<div class="time">זמן שיעוק: ${c.time}</div>` : ""}
               ${isPhysical ? `<div class="room-info">מיקום: ${c.room || ROOM}</div>` : ""}
               ${c.break ? `<div><span class="break">${c.break} :הפסקה</span></div>` : ""}
               ${!isPhysical ? (c.zoom ? `<a class="btn" href="${c.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
@@ -213,7 +210,7 @@
         card.innerHTML = `
           <div class="lecturer">${cls.lecturer}</div>
           <div class="course">${cls.course}</div>
-          ${cls.time ? `<div class="time">זמן שיעור: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
+          ${cls.time ? `<div class="time">זמן שיעוק: ${cls.time}</div>` : `<div class="tbd">שעות יתפרסמו בהמשך</div>`}
           ${isPhysical ? `<div class="room-info">מיקום: ${cls.room || ROOM}</div>` : ""}
           ${cls.break ? `<div><span class="break">${cls.break} :הפסקה</span></div>` : ""}
           ${!isPhysical ? (cls.zoom ? `<a class="btn" href="${cls.zoom}" target="_blank">⤴︎ כניסה לזום</a>` : `<div class="zoom-tbd">קישור זום יתפרסם בהמשך</div>`) : ""}
